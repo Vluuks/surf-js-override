@@ -15,6 +15,7 @@ class Fabrique {
       this.totalFileSize += fileSize;
     }
     console.log(this.totalFileSize);
+    // $('#fileslist').html(this.totalFileSize);
   }
 
   // Calculate the total amount of bytes uploaded across files
@@ -41,6 +42,10 @@ class Fabrique {
     // Keep track of how far we got this upload chunk
     this.previousBytes = completedBytes;
 
+  }
+
+  updateFileStats(stats) {
+    console.log('update called');
   }
 }
 

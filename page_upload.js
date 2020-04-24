@@ -14,7 +14,10 @@ var continueButton = $('<button id="continue" type="button"/>');
 $(continueButton).html('continue');
 overallDiv.append(continueButton);
 
-var filesListBack = $('<div id="filesList" class="step 2"/>').hide();
+var filesListBack = $(`
+                        <div id="filesList" class="step 2">
+                        </div>
+`).hide();
 filesListBack.html('terug div');
 overallDiv.prepend(filesListBack);
 
@@ -223,6 +226,7 @@ filesender.ui.files = {
                           size += filesender.ui.transfer.files[j].size;
                       filesender.ui.nodes.stats.number_of_files.show().find('.value').text(filesender.ui.transfer.files.length + '/' + filesender.config.max_transfer_files);
                       filesender.ui.nodes.stats.size.show().find('.value').text(filesender.ui.formatBytes(size) + '/' + filesender.ui.formatBytes(filesender.config.max_transfer_size));
+                      Fabrique.updateFileStats([filesender.ui.transfer.files.length, 30], [filesender.ui.formatBytes(size), filesender.ui.formatBytes(filesender.config.max_transfer_size)]);
 
                   } else {
                       filesender.ui.files.invalidFiles.splice(iidx, 1);
@@ -306,7 +310,9 @@ filesender.ui.files = {
 
               filesender.ui.nodes.stats.number_of_files.show().find('.value').text(filesender.ui.transfer.files.length + '/' + filesender.config.max_transfer_files);
               filesender.ui.nodes.stats.size.show().find('.value').text(filesender.ui.formatBytes(size) + '/' + filesender.ui.formatBytes(filesender.config.max_transfer_size));
-          }
+
+              Fabrique.updateFileStats([filesender.ui.transfer.files.length, 30], [filesender.ui.formatBytes(size), filesender.ui.formatBytes(filesender.config.max_transfer_size)]);
+            }
 
           node.attr('index', filesender.ui.transfer.files.length - 1);
 
@@ -508,6 +514,8 @@ filesender.ui.files = {
 
       filesender.ui.nodes.stats.number_of_files.hide().find('.value').text('');
       filesender.ui.nodes.stats.size.hide().find('.value').text('');
+
+      Fabrique.updateFileStats([0, 30], [0, filesender.ui.formatBytes(filesender.config.max_transfer_size)]);
 
       filesender.ui.evalUploadEnabled();
   },
