@@ -16,9 +16,11 @@ overallDiv.append(continueButton);
 
 var filesListBack = $(`
                         <div id="filesList" class="step 2">
+                          <div><span id="fileCount"></span>/<span id="maxFileCount"></span></div>
+                          <div><span id="fileSize"></span>/<span id="maxFileSize"></span></div>
+                          <div><span>Encryption is </span> <span id="encryptionStatus"></span></div>
                         </div>
 `).hide();
-filesListBack.html('terug div');
 overallDiv.prepend(filesListBack);
 
 
@@ -856,6 +858,8 @@ filesender.ui.startUpload = function() {
       }
   }
   this.transfer.encryption = filesender.ui.nodes.encryption.toggle.is(':checked');
+
+
   this.transfer.encryption_password = filesender.ui.nodes.encryption.password.val();
   var crypto = window.filesender.crypto_app();
   this.transfer.encryption_key_version = filesender.config.encryption_key_version_new_files;
@@ -1296,6 +1300,7 @@ $(function() {
       $('#encryption_password_show_container').slideToggle();
       $('#encryption_description_container').slideToggle();
       filesender.ui.transfer.encryption = filesender.ui.nodes.encryption.toggle.is(':checked');
+      Fabrique.updateEncryptionStatus(filesender.ui.transfer.encryption);
 
       if( filesender.ui.transfer.encryption ) {
           filesender.ui.files.checkEncryptionPassword(filesender.ui.nodes.encryption.password );

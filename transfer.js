@@ -44,8 +44,22 @@ class Fabrique {
 
   }
 
-  updateFileStats(stats) {
+  updateFileStats(fileCount, formattedFileSize) {
     console.log('update called');
+
+    var filesList = $('#filesList');
+    filesList.find('#fileCount').text(fileCount[0]);
+    filesList.find('#maxFileCount').text(fileCount[1]);
+
+    filesList.find('#fileSize').text(formattedFileSize[0]);
+    filesList.find('#maxFileSize').text(formattedFileSize[1]);
+  }
+
+  updateEncryptionStatus(status) {
+    console.log(status);
+    console.log('encryption?');
+    var text = status ? 'enabled' : 'disabled';
+    $('#filesList').find('#encryptionStatus').text(text);
   }
 }
 
