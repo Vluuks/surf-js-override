@@ -10,10 +10,29 @@ var optionsArea = $('.basic_options').first().parent().addClass('step2').hide();
 var uploadButtons = $('.buttons').addClass('step2').hide();
 var acceptTerms = $('.aup').first().hide();
 
-console.log(optionsArea);
-
-var continueButton = $('<button type="button"/>');
+var continueButton = $('<button id="continue" type="button"/>');
 $(continueButton).html('continue');
+overallDiv.append(continueButton);
+
+var filesListBack = $('<div id="filesList" class="step 2"/>').hide();
+filesListBack.html('terug div');
+overallDiv.prepend(filesListBack);
+
+
+filesListBack.on('click', function(ev) {
+  // toggle previous state
+  uploadArea.show();
+  encryptionArea.show(); // do with css.class at once later
+  $('#continue').show();
+
+  optionsArea.hide();
+  uploadButtons.hide();
+  $(this).hide();
+
+});
+
+
+
 $(continueButton).on('click', function(ev) {
     console.log('continue');
 
@@ -21,11 +40,13 @@ $(continueButton).on('click', function(ev) {
     encryptionArea.hide(); // do with css.class at once later
     $(this).hide();
 
+    filesListBack.show();
     optionsArea.show();
     uploadButtons.show();
 
+
 });
-overallDiv.append(continueButton);
+
 
 // $('#upload_form').hide();
 
